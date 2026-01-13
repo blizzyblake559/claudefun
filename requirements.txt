@@ -1,0 +1,8 @@
+# ClaudeFun Requirements
+# Currently using only Python standard library
+# No external dependencies required for core functionality
+
+# Future enhancements could add:
+# requests>=2.31.0  # For fetching jokes from APIs
+# colorama>=0.4.6   # For colored terminal output
+# rich>=13.0.0      # For beautiful terminal formatting
