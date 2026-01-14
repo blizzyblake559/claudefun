@@ -90,6 +90,12 @@ async function loadVideo(videoId) {
     brainVisualizer.reset();
 
     return new Promise((resolve, reject) => {
+        // Determine the origin - handle file:// protocol
+        let originParam = window.location.origin;
+        if (window.location.protocol === 'file:') {
+            originParam = 'https://www.youtube.com';
+        }
+
         player = new YT.Player('player', {
             height: '180',
             width: '320',
@@ -98,7 +104,10 @@ async function loadVideo(videoId) {
                 autoplay: 1,
                 controls: 1,
                 enablejsapi: 1,
-                origin: window.location.origin
+                playsinline: 1,
+                rel: 0,
+                modestbranding: 1,
+                fs: 1
             },
             events: {
                 onReady: async (event) => {
@@ -114,14 +123,42 @@ async function loadVideo(videoId) {
                     // For demo purposes, we'll use synthesized analysis based on playback state
                     await initializeDemoAnalyzer();
 
-                    event.target.playVideo();
-                    updateStatus('Playing', true);
-                    startVisualization();
+                    // Try to play - some videos may require user interaction first
+                    try {
+                        event.target.playVideo();
+                        updateStatus('Playing', true);
+                        startVisualization();
+                    } catch (err) {
+                        console.warn('Autoplay blocked, user interaction required:', err);
+                        updateStatus('Click play to start', false);
+                        startVisualization();
+                    }
+
                     resolve();
                 },
                 onStateChange: onPlayerStateChange,
                 onError: (error) => {
-                    console.error('Player error:', error);
+                    console.error('Player error code:', error.data);
+                    let errorMsg = 'Failed to load video';
+
+                    switch(error.data) {
+                        case 2:
+                            errorMsg = 'Invalid video ID';
+                            break;
+                        case 5:
+                            errorMsg = 'HTML5 player error';
+                            break;
+                        case 100:
+                            errorMsg = 'Video not found or private';
+                            break;
+                        case 101:
+                        case 150:
+                            errorMsg = 'Video cannot be embedded';
+                            break;
+                    }
+
+                    updateStatus(errorMsg, false);
+                    alert(`YouTube Error: ${errorMsg}\n\nTry:\n1. Using a different video\n2. Opening from a local server (not file://)\n3. Running: python -m http.server 8000`);
                     reject(error);
                 }
             }
