@@ -5,61 +5,61 @@ class BrainVisualizer {
                 name: 'Prefrontal Cortex',
                 triggers: ['tempo', 'pattern'],
                 threshold: 40,
-                description: 'Processing musical anticipation and emotional responses'
+                description: 'Musical anticipation, emotional regulation & decision-making'
             },
             'motor-cortex': {
                 name: 'Motor Cortex',
                 triggers: ['tempo', 'bassEnergy'],
                 threshold: 50,
-                description: 'Rhythm drives movement impulses and body response'
+                description: 'Rhythm processing, beat tracking & movement impulses'
             },
-            'auditory-left': {
-                name: 'Auditory Cortex (Left)',
-                triggers: ['midEnergy', 'frequency'],
-                threshold: 35,
-                description: 'Processing pitch, melody, and harmonic structure'
+            'parietal-lobe': {
+                name: 'Parietal Lobe',
+                triggers: ['brightness', 'pattern'],
+                threshold: 45,
+                description: 'Spatial awareness & sensory integration'
             },
-            'auditory-right': {
-                name: 'Auditory Cortex (Right)',
-                triggers: ['highEnergy', 'brightness'],
-                threshold: 35,
-                description: 'Processing timbre, tonal color, and spatial sound'
-            },
-            'temporal-left': {
-                name: 'Temporal Lobe (Left)',
-                triggers: ['midEnergy'],
+            'auditory-cortex': {
+                name: 'Auditory Cortex',
+                triggers: ['midEnergy', 'frequency', 'highEnergy'],
                 threshold: 30,
-                description: 'Musical memory and recognition of familiar patterns'
+                description: 'Sound processing, pitch, melody & timbre analysis'
             },
-            'temporal-right': {
-                name: 'Temporal Lobe (Right)',
+            'temporal-lobe': {
+                name: 'Temporal Lobe',
                 triggers: ['midEnergy'],
-                threshold: 30,
-                description: 'Emotional memory tied to music'
+                threshold: 35,
+                description: 'Musical memory, recognition & language processing'
             },
             'limbic-system': {
                 name: 'Limbic System',
                 triggers: ['energy', 'bassEnergy'],
                 threshold: 55,
-                description: 'Emotional response and pleasure centers activated'
+                description: 'Emotional response, pleasure & reward processing'
             },
             'cerebellum': {
                 name: 'Cerebellum',
                 triggers: ['tempo', 'bassEnergy'],
                 threshold: 45,
-                description: 'Beat tracking and maintaining rhythm timing'
+                description: 'Timing precision, beat tracking & motor coordination'
             },
             'visual-cortex': {
                 name: 'Visual Cortex',
-                triggers: ['brightness', 'midEnergy'],
+                triggers: ['brightness', 'pattern'],
                 threshold: 40,
-                description: 'Pattern recognition and musical structure visualization'
+                description: 'Pattern recognition & musical imagery'
             },
             'brainstem': {
                 name: 'Brain Stem',
                 triggers: ['energy'],
                 threshold: 60,
-                description: 'Arousal and attention response to loud/intense music'
+                description: 'Arousal, attention & autonomic responses'
+            },
+            'hippocampus': {
+                name: 'Hippocampus',
+                triggers: ['midEnergy', 'pattern'],
+                threshold: 38,
+                description: 'Memory formation & emotional associations'
             }
         };
 

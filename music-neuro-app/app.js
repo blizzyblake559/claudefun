@@ -91,13 +91,14 @@ async function loadVideo(videoId) {
 
     return new Promise((resolve, reject) => {
         player = new YT.Player('player', {
-            height: '0',
-            width: '0',
+            height: '180',
+            width: '320',
             videoId: videoId,
             playerVars: {
                 autoplay: 1,
-                controls: 0,
-                enablejsapi: 1
+                controls: 1,
+                enablejsapi: 1,
+                origin: window.location.origin
             },
             events: {
                 onReady: async (event) => {

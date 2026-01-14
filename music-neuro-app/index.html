@@ -22,64 +22,229 @@
         </div>
 
         <div class="main-content">
-            <!-- Brain Visualization -->
+            <!-- Brain Visualization - Side Profile -->
             <div class="brain-container">
-                <svg id="brain-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Skull outline -->
-                    <ellipse cx="200" cy="180" rx="140" ry="160" class="skull" fill="none" stroke="#2a2a2a" stroke-width="2" opacity="0.3"/>
-                    <ellipse cx="200" cy="200" rx="130" ry="140" class="skull-inner" fill="none" stroke="#2a2a2a" stroke-width="1" opacity="0.2"/>
+                <svg id="brain-svg" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Define gradients for 3D effect -->
+                    <defs>
+                        <radialGradient id="skullGradient">
+                            <stop offset="0%" style="stop-color:#3a3a3a;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:0.5" />
+                        </radialGradient>
 
-                    <!-- Brain regions -->
-                    <!-- Prefrontal Cortex (top front) - Executive function, emotional regulation -->
-                    <path id="prefrontal-cortex" class="brain-region"
-                          d="M 150 80 Q 200 60 250 80 L 240 130 Q 200 120 160 130 Z"
-                          data-region="Prefrontal Cortex"
-                          data-function="Emotional processing & musical anticipation"/>
+                        <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#004466;stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:#001122;stop-opacity:0.4" />
+                        </linearGradient>
 
-                    <!-- Motor Cortex (top middle) - Rhythm and movement -->
-                    <path id="motor-cortex" class="brain-region"
-                          d="M 140 130 Q 200 110 260 130 L 250 180 Q 200 165 150 180 Z"
-                          data-region="Motor Cortex"
-                          data-function="Rhythm perception & movement impulses"/>
+                        <!-- Glow filters for active regions -->
+                        <filter id="glow-low">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
 
-                    <!-- Auditory Cortex (sides) - Sound processing -->
-                    <ellipse id="auditory-left" class="brain-region" cx="90" cy="200" rx="35" ry="45"
-                             data-region="Auditory Cortex (Left)"
-                             data-function="Pitch, melody & frequency processing"/>
-                    <ellipse id="auditory-right" class="brain-region" cx="310" cy="200" rx="35" ry="45"
-                             data-region="Auditory Cortex (Right)"
-                             data-function="Timbre & tonal color processing"/>
+                        <filter id="glow-medium">
+                            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
 
-                    <!-- Temporal Lobe (lower sides) - Memory and emotion -->
-                    <path id="temporal-left" class="brain-region"
-                          d="M 80 240 Q 70 270 90 300 L 130 290 Q 120 260 100 240 Z"
-                          data-region="Temporal Lobe (Left)"
-                          data-function="Musical memory & recognition"/>
-                    <path id="temporal-right" class="brain-region"
-                          d="M 320 240 Q 330 270 310 300 L 270 290 Q 280 260 300 240 Z"
-                          data-region="Temporal Lobe (Right)"
-                          data-function="Musical memory & recognition"/>
+                        <filter id="glow-high">
+                            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
 
-                    <!-- Limbic System (center) - Emotional response -->
-                    <circle id="limbic-system" class="brain-region" cx="200" cy="220" r="30"
-                            data-region="Limbic System"
-                            data-function="Emotional response & pleasure"/>
+                    <!-- Skull Outline - Side Profile -->
+                    <g id="skull-structure" opacity="0.4">
+                        <!-- Main cranium -->
+                        <path class="skull-bone"
+                              d="M 150 300
+                                 Q 130 250 130 200
+                                 Q 130 120 180 80
+                                 Q 230 50 290 60
+                                 Q 360 70 390 130
+                                 Q 410 180 400 240
+                                 Q 395 280 380 310
+                                 Q 370 330 350 345
+                                 L 340 355
+                                 Q 320 370 300 375
+                                 L 290 378"
+                              fill="none" stroke="#2a4a5a" stroke-width="2.5"/>
 
-                    <!-- Cerebellum (bottom) - Timing and coordination -->
-                    <ellipse id="cerebellum" class="brain-region" cx="200" cy="320" rx="60" ry="40"
-                             data-region="Cerebellum"
-                             data-function="Beat tracking & tempo processing"/>
+                        <!-- Facial structure -->
+                        <path class="skull-bone"
+                              d="M 150 300
+                                 L 160 330
+                                 Q 170 350 190 360
+                                 L 220 370
+                                 Q 240 375 260 373
+                                 L 280 370"
+                              fill="none" stroke="#2a4a5a" stroke-width="2"/>
 
-                    <!-- Visual Cortex (back) - Pattern recognition -->
-                    <path id="visual-cortex" class="brain-region"
-                          d="M 160 280 Q 200 270 240 280 L 230 310 Q 200 300 170 310 Z"
-                          data-region="Visual Cortex"
-                          data-function="Musical pattern recognition"/>
+                        <!-- Jaw -->
+                        <path class="skull-bone"
+                              d="M 160 330
+                                 Q 150 360 155 390
+                                 Q 160 410 180 425
+                                 Q 200 435 220 432
+                                 L 240 428"
+                              fill="none" stroke="#2a4a5a" stroke-width="2"/>
 
-                    <!-- Brain stem -->
-                    <rect id="brainstem" class="brain-region" x="190" y="350" width="20" height="50" rx="5"
-                          data-region="Brain Stem"
-                          data-function="Arousal & attention response"/>
+                        <!-- Eye socket -->
+                        <ellipse cx="180" cy="260" rx="25" ry="30"
+                                 fill="none" stroke="#2a4a5a" stroke-width="1.5" opacity="0.3"/>
+
+                        <!-- Nasal cavity -->
+                        <path class="skull-bone"
+                              d="M 175 310 Q 180 320 185 315"
+                              fill="none" stroke="#2a4a5a" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- Brain Structure - Side Profile -->
+                    <g id="brain-structure">
+                        <!-- Frontal Lobe / Prefrontal Cortex -->
+                        <path id="prefrontal-cortex" class="brain-region"
+                              d="M 180 140
+                                 Q 190 120 210 110
+                                 Q 230 105 250 108
+                                 L 255 120
+                                 Q 245 130 240 145
+                                 Q 235 160 230 175
+                                 L 220 185
+                                 Q 205 175 195 165
+                                 Q 185 155 180 140 Z"
+                              data-region="Prefrontal Cortex"
+                              data-function="Musical anticipation, emotional regulation & decision-making"/>
+
+                        <!-- Motor Cortex -->
+                        <path id="motor-cortex" class="brain-region"
+                              d="M 250 108
+                                 Q 270 110 290 120
+                                 Q 305 130 315 145
+                                 L 320 160
+                                 Q 315 175 305 185
+                                 L 290 195
+                                 Q 275 188 265 180
+                                 L 255 170
+                                 Q 252 145 255 120 Z"
+                              data-region="Motor Cortex"
+                              data-function="Rhythm processing, beat tracking & movement impulses"/>
+
+                        <!-- Parietal Lobe -->
+                        <path id="parietal-lobe" class="brain-region"
+                              d="M 315 145
+                                 Q 330 150 345 165
+                                 Q 358 180 365 200
+                                 Q 368 220 365 240
+                                 L 355 250
+                                 Q 340 245 330 235
+                                 L 315 220
+                                 Q 305 205 305 185
+                                 Q 310 165 315 145 Z"
+                              data-region="Parietal Lobe"
+                              data-function="Spatial awareness & sensory integration"/>
+
+                        <!-- Occipital Lobe / Visual Cortex -->
+                        <path id="visual-cortex" class="brain-region"
+                              d="M 365 200
+                                 Q 375 210 380 225
+                                 Q 385 245 380 265
+                                 Q 375 280 365 290
+                                 L 350 295
+                                 Q 340 285 335 270
+                                 L 335 250
+                                 Q 340 230 350 215
+                                 Q 358 205 365 200 Z"
+                              data-region="Visual Cortex"
+                              data-function="Pattern recognition & musical imagery"/>
+
+                        <!-- Temporal Lobe (upper) -->
+                        <path id="temporal-lobe" class="brain-region"
+                              d="M 220 185
+                                 Q 230 195 240 210
+                                 Q 248 225 250 242
+                                 L 245 260
+                                 Q 235 265 220 265
+                                 Q 205 262 195 255
+                                 L 190 240
+                                 Q 195 220 205 205
+                                 Q 212 192 220 185 Z"
+                              data-region="Temporal Lobe"
+                              data-function="Musical memory, recognition & language processing"/>
+
+                        <!-- Auditory Cortex (inside temporal lobe) -->
+                        <path id="auditory-cortex" class="brain-region"
+                              d="M 225 220
+                                 Q 235 225 240 235
+                                 Q 242 245 238 255
+                                 L 228 258
+                                 Q 218 254 213 245
+                                 Q 210 235 215 225
+                                 Q 220 218 225 220 Z"
+                              data-region="Auditory Cortex"
+                              data-function="Sound processing, pitch, melody & timbre analysis"/>
+
+                        <!-- Limbic System (deep structure) -->
+                        <ellipse id="limbic-system" class="brain-region"
+                                 cx="270" cy="240" rx="25" ry="30"
+                                 data-region="Limbic System"
+                                 data-function="Emotional response, pleasure & reward processing"/>
+
+                        <!-- Cerebellum (back lower) -->
+                        <path id="cerebellum" class="brain-region"
+                              d="M 305 285
+                                 Q 315 290 330 295
+                                 Q 345 298 355 295
+                                 L 360 305
+                                 Q 358 320 350 332
+                                 Q 340 342 325 348
+                                 Q 310 352 295 348
+                                 L 285 340
+                                 Q 280 325 283 310
+                                 Q 288 295 305 285 Z"
+                              data-region="Cerebellum"
+                              data-function="Timing precision, beat tracking & motor coordination"/>
+
+                        <!-- Brain Stem -->
+                        <path id="brainstem" class="brain-region"
+                              d="M 285 340
+                                 Q 280 355 278 370
+                                 L 275 395
+                                 Q 277 405 282 410
+                                 L 292 412
+                                 Q 300 408 302 398
+                                 L 305 370
+                                 Q 303 355 298 345
+                                 Q 292 340 285 340 Z"
+                              data-region="Brain Stem"
+                              data-function="Arousal, attention & autonomic responses"/>
+
+                        <!-- Hippocampus (deep structure for memory) -->
+                        <ellipse id="hippocampus" class="brain-region"
+                                 cx="255" cy="270" rx="18" ry="25"
+                                 data-region="Hippocampus"
+                                 data-function="Memory formation & emotional associations"/>
+                    </g>
+
+                    <!-- Scan lines for high-tech effect -->
+                    <g id="scan-lines" opacity="0.1">
+                        <line x1="100" y1="100" x2="420" y2="100" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="150" x2="420" y2="150" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="200" x2="420" y2="200" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="250" x2="420" y2="250" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="300" x2="420" y2="300" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="350" x2="420" y2="350" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="400" x2="420" y2="400" stroke="#00ffff" stroke-width="0.5"/>
+                    </g>
                 </svg>
 
                 <div class="audio-status" id="audio-status">
@@ -128,8 +293,8 @@
             </div>
         </div>
 
-        <!-- Hidden YouTube Player -->
-        <div id="player-container" style="display: none;">
+        <!-- YouTube Player - Small but visible for audio -->
+        <div id="player-container">
             <div id="player"></div>
         </div>
     </div>
