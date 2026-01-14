@@ -2,6 +2,7 @@
 let player;
 let audioAnalyzer;
 let brainVisualizer;
+let reportSynthesizer;
 let isPlaying = false;
 let updateInterval;
 
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audioAnalyzer = new AudioAnalyzer();
     brainVisualizer = new BrainVisualizer();
     brainVisualizer.initialize();
+    reportSynthesizer = new ReportSynthesizer();
 
     // Set up event listeners
     const analyzeBtn = document.getElementById('analyze-btn');
@@ -217,7 +219,9 @@ function startVisualization() {
             // Update UI
             updateMetrics(analysis);
             brainVisualizer.update(analysis);
-            brainVisualizer.updateNeurologicalEffects(analysis);
+
+            // Generate and update dynamic reports
+            updateDynamicReports(analysis);
         }
     }, 33);
 }
@@ -265,6 +269,49 @@ function updateMetrics(analysis) {
     document.getElementById('tempo-value').textContent = `${Math.round(analysis.tempo)} BPM`;
     document.getElementById('energy-value').textContent = `${Math.round(analysis.energy)}%`;
     document.getElementById('brightness-value').textContent = `${Math.round(analysis.brightness)}%`;
+}
+
+function updateDynamicReports(analysis) {
+    // Get active regions from brain visualizer
+    const activeRegions = brainVisualizer.activeRegions;
+    const brainRegions = brainVisualizer.brainRegions;
+
+    // Generate dynamic narrative report
+    const narrative = reportSynthesizer.generateDynamicReport(analysis, activeRegions, brainRegions);
+
+    // Update neurological effects with narrative
+    const effectsElement = document.getElementById('effects-list');
+    if (effectsElement && narrative) {
+        effectsElement.innerHTML = `
+            <div class="narrative-report">
+                <p class="narrative-text">${narrative}</p>
+                <span class="report-timestamp">Updated ${new Date().toLocaleTimeString()}</span>
+            </div>
+        `;
+    }
+
+    // Generate active regions summary
+    const regionSummaries = reportSynthesizer.generateActiveRegionsSummary(activeRegions, brainRegions, analysis);
+
+    // Update active regions list with detailed explanations
+    const regionListElement = document.getElementById('region-list');
+    if (regionListElement) {
+        if (regionSummaries.length === 0) {
+            regionListElement.innerHTML = '<p class="placeholder">No significant activity detected</p>';
+        } else {
+            let html = '';
+            regionSummaries.forEach(summary => {
+                html += `
+                    <div class="region-item">
+                        <div class="region-name">${summary.name}</div>
+                        <div class="region-intensity">${summary.intensity} activity</div>
+                        <div class="region-explanation">${summary.explanation}</div>
+                    </div>
+                `;
+            });
+            regionListElement.innerHTML = html;
+        }
+    }
 }
 
 function updateStatus(text, playing) {

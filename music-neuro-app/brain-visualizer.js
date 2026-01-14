@@ -69,9 +69,14 @@ class BrainVisualizer {
     }
 
     initialize() {
-        // Cache DOM elements
+        // Cache DOM elements - both the region itself and its parent group
         Object.keys(this.brainRegions).forEach(regionId => {
-            this.regionElements[regionId] = document.getElementById(regionId);
+            const element = document.getElementById(regionId);
+            const group = document.getElementById(`${regionId}-group`);
+            this.regionElements[regionId] = {
+                element: element,
+                group: group || element
+            };
         });
     }
 
@@ -86,8 +91,11 @@ class BrainVisualizer {
 
         // Check each brain region
         Object.entries(this.brainRegions).forEach(([regionId, region]) => {
-            const element = this.regionElements[regionId];
-            if (!element) return;
+            const regionData = this.regionElements[regionId];
+            if (!regionData || !regionData.element) return;
+
+            const element = regionData.element;
+            const group = regionData.group;
 
             // Calculate activation level based on triggers
             let activationScore = 0;
@@ -139,19 +147,25 @@ class BrainVisualizer {
                 newActiveRegions.add(regionId);
 
                 // Set activation intensity
-                element.classList.remove('active-low', 'active-medium', 'active-high');
+                element.classList.remove('active-low', 'active-medium', 'active-high', 'active');
+                group.classList.remove('active-low', 'active-medium', 'active-high', 'active');
 
                 if (normalizedScore > region.threshold + 30) {
                     element.classList.add('active-high');
+                    group.classList.add('active-high');
                 } else if (normalizedScore > region.threshold + 15) {
                     element.classList.add('active-medium');
+                    group.classList.add('active-medium');
                 } else {
                     element.classList.add('active-low');
+                    group.classList.add('active-low');
                 }
 
                 element.classList.add('active');
+                group.classList.add('active');
             } else {
                 element.classList.remove('active', 'active-low', 'active-medium', 'active-high');
+                group.classList.remove('active', 'active-low', 'active-medium', 'active-high');
             }
         });
 
@@ -285,9 +299,14 @@ class BrainVisualizer {
 
     reset() {
         Object.keys(this.regionElements).forEach(regionId => {
-            const element = this.regionElements[regionId];
-            if (element) {
-                element.classList.remove('active', 'active-low', 'active-medium', 'active-high');
+            const regionData = this.regionElements[regionId];
+            if (regionData) {
+                if (regionData.element) {
+                    regionData.element.classList.remove('active', 'active-low', 'active-medium', 'active-high');
+                }
+                if (regionData.group) {
+                    regionData.group.classList.remove('active', 'active-low', 'active-medium', 'active-high');
+                }
             }
         });
 
@@ -302,5 +321,128 @@ class BrainVisualizer {
         if (effectsElement) {
             effectsElement.innerHTML = '<p class="placeholder">Analysis will appear here during playback</p>';
         }
+    }
+}
+
+// Dynamic Report Synthesizer
+class ReportSynthesizer {
+    constructor() {
+        this.lastReportTime = 0;
+        this.reportHistory = [];
+        this.currentNarrative = '';
+        this.narrativeSegments = [];
+    }
+
+    generateDynamicReport(analysis, activeRegions, brainRegions) {
+        const now = Date.now();
+
+        // Update report every 3 seconds
+        if (now - this.lastReportTime < 3000) {
+            return this.currentNarrative;
+        }
+
+        this.lastReportTime = now;
+
+        // Build narrative based on current state
+        const segments = [];
+
+        // Analyze tempo patterns
+        if (analysis.tempo > 140) {
+            segments.push(`The rapid tempo of ${analysis.tempo} BPM is driving intense motor cortex activation, triggering strong movement impulses.`);
+        } else if (analysis.tempo < 80) {
+            segments.push(`The slow ${analysis.tempo} BPM tempo is inducing a relaxation response, lowering cortisol levels.`);
+        } else {
+            segments.push(`At ${analysis.tempo} BPM, the music maintains a balanced tempo that supports sustained attention.`);
+        }
+
+        // Analyze energy and emotional response
+        if (analysis.energy > 70) {
+            segments.push(`High energy levels (${analysis.energy}%) are triggering dopamine release in the limbic system, creating feelings of excitement and euphoria.`);
+        } else if (analysis.energy < 40) {
+            segments.push(`The gentle energy profile (${analysis.energy}%) is activating parasympathetic responses, promoting calm and introspection.`);
+        }
+
+        // Analyze frequency content
+        if (analysis.bassEnergy > 65) {
+            segments.push(`Powerful bass frequencies are resonating through the brain stem and limbic system, creating visceral emotional responses.`);
+        }
+
+        if (analysis.brightness > 60) {
+            segments.push(`Bright, high-frequency content (${analysis.brightness}% brightness) is enhancing alertness and positive emotional valence through auditory cortex stimulation.`);
+        } else if (analysis.brightness < 35) {
+            segments.push(`The darker timbral quality (${analysis.brightness}% brightness) creates emotional depth and contemplative mood states.`);
+        }
+
+        // Analyze active region count
+        const activeCount = activeRegions.size;
+        if (activeCount >= 7) {
+            segments.push(`With ${activeCount} brain regions highly active, the music is creating a rich, immersive neural experience engaging multiple cognitive and emotional systems.`);
+        } else if (activeCount >= 4) {
+            segments.push(`${activeCount} brain regions are currently processing the music, showing balanced engagement across sensory and emotional centers.`);
+        } else if (activeCount > 0) {
+            segments.push(`Currently ${activeCount} regions show significant activity, indicating focused neural processing of specific musical elements.`);
+        }
+
+        // Pattern complexity
+        if (analysis.spectralCentroid > 2500) {
+            segments.push(`Complex harmonic patterns are engaging prefrontal cortex networks, stimulating anticipation and pattern recognition processes.`);
+        }
+
+        // Memory and familiarity
+        if (analysis.midEnergy > 50 && activeRegions.has('temporal-lobe')) {
+            segments.push(`Strong temporal lobe activation suggests the music is triggering memory networks, potentially evoking emotional associations and nostalgia.`);
+        }
+
+        // Select 2-3 most relevant segments
+        const selectedSegments = segments.slice(0, Math.min(3, segments.length));
+        this.currentNarrative = selectedSegments.join(' ');
+
+        return this.currentNarrative;
+    }
+
+    generateActiveRegionsSummary(activeRegions, brainRegions, analysis) {
+        const summaries = [];
+
+        activeRegions.forEach(regionId => {
+            const region = brainRegions[regionId];
+            if (!region) return;
+
+            let intensityDesc = 'moderate';
+            let explanation = '';
+
+            // Determine why this region is active
+            if (regionId === 'motor-cortex') {
+                intensityDesc = analysis.tempo > 140 ? 'high' : 'moderate';
+                explanation = `responding to rhythmic patterns at ${analysis.tempo} BPM`;
+            } else if (regionId === 'auditory-cortex') {
+                intensityDesc = analysis.midEnergy > 60 ? 'high' : 'moderate';
+                explanation = `processing complex melodic and timbral information`;
+            } else if (regionId === 'limbic-system') {
+                intensityDesc = analysis.energy > 70 ? 'intense' : 'moderate';
+                explanation = `generating emotional responses and pleasure signals`;
+            } else if (regionId === 'prefrontal-cortex') {
+                intensityDesc = 'engaged';
+                explanation = `anticipating musical patterns and regulating emotional responses`;
+            } else if (regionId === 'cerebellum') {
+                intensityDesc = analysis.bassEnergy > 60 ? 'high' : 'steady';
+                explanation = `maintaining precise beat tracking and timing coordination`;
+            } else if (regionId === 'temporal-lobe') {
+                intensityDesc = 'active';
+                explanation = `accessing musical memories and pattern recognition`;
+            } else if (regionId === 'visual-cortex') {
+                intensityDesc = 'engaged';
+                explanation = `creating internal visualizations and pattern imagery`;
+            } else {
+                explanation = `actively processing musical information`;
+            }
+
+            summaries.push({
+                name: region.name,
+                intensity: intensityDesc,
+                explanation: explanation
+            });
+        });
+
+        return summaries;
     }
 }
