@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Music Analyzer - 3D</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #00f2ff, #0066ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 1.1em;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #00f2ff;
+        }
+
+        /* Input Section */
+        .input-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto 10px;
+        }
+
+        #youtube-url {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 180, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        #youtube-url:focus {
+            outline: none;
+            border-color: rgba(0, 180, 255, 0.8);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        #analyze-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #0066ff, #00f2ff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        #analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 180, 255, 0.4);
+        }
+
+        #analyze-btn:active {
+            transform: translateY(0);
+        }
+
+        .hint {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Brain Container */
+        .brain-container {
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.8), rgba(0, 40, 60, 0.6));
+            border: 2px solid rgba(0, 180, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow:
+                inset 0 0 50px rgba(0, 180, 255, 0.05),
+                0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        #brain-3d-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .viewer-controls {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            font-size: 0.85em;
+            color: #888;
+            text-align: center;
+        }
+
+        .viewer-controls span {
+            color: #00f2ff;
+        }
+
+        /* Audio Status */
+        .audio-status {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #666;
+            transition: all 0.3s;
+        }
+
+        .status-indicator.playing {
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Info Panel */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .analysis-display,
+        .active-regions,
+        .neurological-effects {
+            background: rgba(0, 20, 40, 0.5);
+            border: 2px solid rgba(0, 180, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        h3 {
+            color: #00f2ff;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 1px solid rgba(0, 180, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        /* Metrics Grid */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .metric {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 180, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .metric-label {
+            color: #888;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            color: #00f2ff;
+            font-size: 1.5em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Region List */
+        .region-list,
+        .effects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .region-item,
+        .effect-item {
+            background: rgba(0, 100, 150, 0.1);
+            border-left: 3px solid #00b4ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .region-name,
+        .effect-title {
+            color: #00f2ff;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .region-intensity {
+            color: #00d4ff;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 3px 0;
+        }
+
+        .region-explanation {
+            color: #bbb;
+            font-size: 0.88em;
+            font-style: italic;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .narrative-report {
+            padding: 15px;
+            background: rgba(0, 100, 150, 0.08);
+            border-left: 3px solid #00ff88;
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .narrative-text {
+            color: #e0e0e0;
+            font-size: 0.95em;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .report-timestamp {
+            display: block;
+            color: #00ff88;
+            font-size: 0.75em;
+            text-align: right;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        .placeholder {
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Scrollbar styling */
+        .region-list::-webkit-scrollbar,
+        .effects-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .region-list::-webkit-scrollbar-track,
+        .effects-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .region-list::-webkit-scrollbar-thumb,
+        .effects-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 180, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        /* YouTube Player Container */
+        #player-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(0, 20, 40, 0.9);
+            border: 2px solid rgba(0, 180, 255, 0.3);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #player {
+            width: 320px;
+            height: 180px;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+            border-radius: 10px;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 242, 255, 0.3);
+            border-top: 4px solid #00f2ff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #00f2ff;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Neural Music Analyzer</h1>
+            <p class="subtitle">Visualize how music affects your brain in real-time 3D</p>
+            <div class="tech-badge">⚡ Powered by Three.js WebGL</div>
+        </header>
+
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="youtube-url" placeholder="Paste YouTube video URL here..." />
+                <button id="analyze-btn">Analyze</button>
+            </div>
+            <p class="hint">Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
+        </div>
+
+        <div class="main-content">
+            <!-- 3D Brain Visualization -->
+            <div class="brain-container">
+                <div id="brain-3d-container">
+                    <div class="loading-overlay" id="loading-overlay">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Loading 3D Brain...</div>
+                    </div>
+                </div>
+
+                <div class="viewer-controls">
+                    <span>🖱️ Drag</span> to rotate · <span>🔍 Scroll</span> to zoom · <span>Auto-rotating</span> when idle
+                </div>
+
+                <div class="audio-status" id="audio-status">
+                    <div class="status-indicator"></div>
+                    <span>Ready to analyze</span>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+                <div class="analysis-display">
+                    <h3>Real-Time Analysis</h3>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <span class="metric-label">Frequency</span>
+                            <span class="metric-value" id="frequency-value">-- Hz</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Tempo</span>
+                            <span class="metric-value" id="tempo-value">-- BPM</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Energy</span>
+                            <span class="metric-value" id="energy-value">--%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Brightness</span>
+                            <span class="metric-value" id="brightness-value">--%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="active-regions">
+                    <h3>Active Brain Regions</h3>
+                    <div id="region-list" class="region-list">
+                        <p class="placeholder">Play music to see active regions</p>
+                    </div>
+                </div>
+
+                <div class="neurological-effects">
+                    <h3>Neurological Effects</h3>
+                    <div id="effects-list" class="effects-list">
+                        <p class="placeholder">Analysis will appear here during playback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YouTube Player -->
+        <div id="player-container">
+            <div id="player"></div>
+        </div>
+    </div>
+
+    <!-- Load Three.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js"></script>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- Load our custom scripts -->
+    <script src="audio-analyzer.js"></script>
+    <script src="brain-visualizer.js"></script>
+    <script src="brain-3d.js"></script>
+    <script src="app-3d.js"></script>
+</body>
+</html>
