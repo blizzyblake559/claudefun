@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Music Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Neural Music Analyzer</h1>
+            <p class="subtitle">Visualize how music affects your brain</p>
+        </header>
+
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="youtube-url" placeholder="Paste YouTube video URL here..." />
+                <button id="analyze-btn">Analyze</button>
+            </div>
+            <p class="hint">Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Brain Visualization - Side Profile -->
+            <div class="brain-container">
+                <svg id="brain-svg" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Define gradients for 3D effect -->
+                    <defs>
+                        <radialGradient id="skullGradient">
+                            <stop offset="0%" style="stop-color:#3a3a3a;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:0.5" />
+                        </radialGradient>
+
+                        <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#004466;stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:#001122;stop-opacity:0.4" />
+                        </linearGradient>
+
+                        <!-- Glow filters for active regions -->
+                        <filter id="glow-low">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+
+                        <filter id="glow-medium">
+                            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+
+                        <filter id="glow-high">
+                            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Skull Outline - Side Profile -->
+                    <g id="skull-structure" opacity="0.4">
+                        <!-- Main cranium -->
+                        <path class="skull-bone"
+                              d="M 150 300
+                                 Q 130 250 130 200
+                                 Q 130 120 180 80
+                                 Q 230 50 290 60
+                                 Q 360 70 390 130
+                                 Q 410 180 400 240
+                                 Q 395 280 380 310
+                                 Q 370 330 350 345
+                                 L 340 355
+                                 Q 320 370 300 375
+                                 L 290 378"
+                              fill="none" stroke="#2a4a5a" stroke-width="2.5"/>
+
+                        <!-- Facial structure -->
+                        <path class="skull-bone"
+                              d="M 150 300
+                                 L 160 330
+                                 Q 170 350 190 360
+                                 L 220 370
+                                 Q 240 375 260 373
+                                 L 280 370"
+                              fill="none" stroke="#2a4a5a" stroke-width="2"/>
+
+                        <!-- Jaw -->
+                        <path class="skull-bone"
+                              d="M 160 330
+                                 Q 150 360 155 390
+                                 Q 160 410 180 425
+                                 Q 200 435 220 432
+                                 L 240 428"
+                              fill="none" stroke="#2a4a5a" stroke-width="2"/>
+
+                        <!-- Eye socket -->
+                        <ellipse cx="180" cy="260" rx="25" ry="30"
+                                 fill="none" stroke="#2a4a5a" stroke-width="1.5" opacity="0.3"/>
+
+                        <!-- Nasal cavity -->
+                        <path class="skull-bone"
+                              d="M 175 310 Q 180 320 185 315"
+                              fill="none" stroke="#2a4a5a" stroke-width="1.5"/>
+                    </g>
+
+                    <!-- Brain Structure - Detailed Realistic Side Profile -->
+                    <g id="brain-structure">
+                        <!-- Frontal Lobe with gyri (folding) details -->
+                        <g id="prefrontal-cortex-group" class="brain-region-group">
+                            <path id="prefrontal-cortex" class="brain-region brain-tissue"
+                                  d="M 170 150
+                                     C 175 135, 185 125, 200 118
+                                     C 210 114, 222 112, 235 113
+                                     C 245 114, 252 117, 258 122
+                                     L 256 135
+                                     C 252 142, 247 148, 242 155
+                                     C 237 162, 232 170, 228 178
+                                     C 222 186, 215 192, 207 195
+                                     C 198 188, 190 180, 184 170
+                                     C 178 162, 173 156, 170 150 Z"
+                                  data-region="Prefrontal Cortex"
+                                  data-function="Musical anticipation, emotional regulation & decision-making"/>
+                            <!-- Gyri details (folds) -->
+                            <path class="brain-fold" d="M 185 135 Q 195 132 205 135" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 210 145 Q 220 142 230 145" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 195 160 Q 205 157 215 160" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                        </g>
+
+                        <!-- Motor Cortex with realistic folds -->
+                        <g id="motor-cortex-group" class="brain-region-group">
+                            <path id="motor-cortex" class="brain-region brain-tissue"
+                                  d="M 258 122
+                                     C 268 125, 280 130, 292 138
+                                     C 302 145, 310 154, 316 164
+                                     C 320 172, 322 180, 321 188
+                                     C 318 196, 313 203, 306 209
+                                     C 298 215, 288 218, 278 219
+                                     C 270 216, 264 210, 260 202
+                                     C 257 192, 256 180, 257 167
+                                     C 257 152, 257 137, 258 122 Z"
+                                  data-region="Motor Cortex"
+                                  data-function="Rhythm processing, beat tracking & movement impulses"/>
+                            <path class="brain-fold" d="M 275 145 Q 285 142 295 145" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 280 165 Q 290 162 300 165" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 285 185 Q 295 182 305 185" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                        </g>
+
+                        <!-- Parietal Lobe -->
+                        <g id="parietal-lobe-group" class="brain-region-group">
+                            <path id="parietal-lobe" class="brain-region brain-tissue"
+                                  d="M 316 164
+                                     C 326 168, 336 175, 345 185
+                                     C 353 194, 360 205, 365 217
+                                     C 368 228, 369 239, 367 250
+                                     C 364 259, 359 266, 352 271
+                                     C 344 275, 335 277, 326 277
+                                     C 318 274, 312 268, 308 260
+                                     C 305 249, 304 236, 306 223
+                                     C 308 206, 311 185, 316 164 Z"
+                                  data-region="Parietal Lobe"
+                                  data-function="Spatial awareness & sensory integration"/>
+                            <path class="brain-fold" d="M 330 190 Q 340 187 350 190" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 335 215 Q 345 212 355 215" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 340 240 Q 350 237 360 240" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                        </g>
+
+                        <!-- Occipital Lobe / Visual Cortex -->
+                        <g id="visual-cortex-group" class="brain-region-group">
+                            <path id="visual-cortex" class="brain-region brain-tissue"
+                                  d="M 367 250
+                                     C 372 257, 377 266, 380 276
+                                     C 382 286, 382 296, 379 305
+                                     C 375 313, 369 319, 361 323
+                                     C 352 326, 343 326, 334 323
+                                     C 327 319, 322 313, 319 305
+                                     C 318 295, 319 284, 322 274
+                                     C 327 264, 335 256, 344 251
+                                     C 351 249, 359 249, 367 250 Z"
+                                  data-region="Visual Cortex"
+                                  data-function="Pattern recognition & musical imagery"/>
+                            <path class="brain-fold" d="M 340 275 Q 350 272 360 275" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 345 295 Q 355 292 365 295" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                        </g>
+
+                        <!-- Temporal Lobe with detailed structure -->
+                        <g id="temporal-lobe-group" class="brain-region-group">
+                            <path id="temporal-lobe" class="brain-region brain-tissue"
+                                  d="M 207 195
+                                     C 215 202, 225 209, 236 215
+                                     C 246 221, 255 227, 262 235
+                                     C 267 242, 270 250, 270 259
+                                     C 269 268, 265 276, 258 282
+                                     C 249 288, 238 291, 226 291
+                                     C 215 289, 205 284, 197 277
+                                     C 191 269, 187 259, 186 248
+                                     C 186 235, 190 222, 197 210
+                                     C 200 203, 203 198, 207 195 Z"
+                                  data-region="Temporal Lobe"
+                                  data-function="Musical memory, recognition & language processing"/>
+                            <path class="brain-fold" d="M 210 225 Q 220 222 230 225" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 220 245 Q 230 242 240 245" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 215 265 Q 225 262 235 265" stroke="#1a3a4a" stroke-width="1" fill="none" opacity="0.6"/>
+                        </g>
+
+                        <!-- Auditory Cortex (inside temporal lobe) -->
+                        <g id="auditory-cortex-group" class="brain-region-group">
+                            <path id="auditory-cortex" class="brain-region brain-tissue"
+                                  d="M 220 230
+                                     C 228 232, 236 236, 242 242
+                                     C 246 247, 248 253, 247 260
+                                     C 245 267, 241 272, 235 275
+                                     C 228 277, 220 277, 213 274
+                                     C 208 270, 205 264, 204 257
+                                     C 204 249, 207 242, 212 236
+                                     C 215 232, 217 230, 220 230 Z"
+                                  data-region="Auditory Cortex"
+                                  data-function="Sound processing, pitch, melody & timbre analysis"/>
+                            <path class="brain-fold" d="M 218 245 Q 225 243 232 245" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.7"/>
+                            <path class="brain-fold" d="M 220 258 Q 227 256 234 258" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.7"/>
+                        </g>
+
+                        <!-- Limbic System (deep structure) -->
+                        <g id="limbic-system-group" class="brain-region-group">
+                            <ellipse id="limbic-system" class="brain-region brain-tissue"
+                                     cx="270" cy="245" rx="28" ry="35"
+                                     data-region="Limbic System"
+                                     data-function="Emotional response, pleasure & reward processing"/>
+                            <ellipse class="brain-fold" cx="270" cy="245" rx="20" ry="25" fill="none" stroke="#1a3a4a" stroke-width="0.8" opacity="0.5"/>
+                        </g>
+
+                        <!-- Cerebellum with characteristic folds -->
+                        <g id="cerebellum-group" class="brain-region-group">
+                            <path id="cerebellum" class="brain-region brain-tissue"
+                                  d="M 300 295
+                                     C 312 298, 325 301, 338 303
+                                     C 349 305, 359 306, 368 305
+                                     C 373 312, 375 321, 374 331
+                                     C 371 341, 365 350, 356 357
+                                     C 345 364, 332 368, 318 369
+                                     C 305 368, 293 364, 283 358
+                                     C 275 351, 270 342, 268 331
+                                     C 268 319, 272 306, 280 296
+                                     C 287 292, 293 293, 300 295 Z"
+                                  data-region="Cerebellum"
+                                  data-function="Timing precision, beat tracking & motor coordination"/>
+                            <!-- Distinctive parallel folds of cerebellum -->
+                            <path class="brain-fold" d="M 295 315 Q 325 313 355 315" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.7"/>
+                            <path class="brain-fold" d="M 290 325 Q 325 323 360 325" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.7"/>
+                            <path class="brain-fold" d="M 292 335 Q 325 333 358 335" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.7"/>
+                            <path class="brain-fold" d="M 295 345 Q 325 343 355 345" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.7"/>
+                        </g>
+
+                        <!-- Brain Stem -->
+                        <g id="brainstem-group" class="brain-region-group">
+                            <path id="brainstem" class="brain-region brain-tissue"
+                                  d="M 283 358
+                                     C 278 368, 275 380, 274 392
+                                     C 273 404, 274 416, 278 426
+                                     C 282 433, 288 437, 296 438
+                                     C 304 438, 312 435, 317 429
+                                     C 321 421, 322 411, 321 400
+                                     C 320 387, 317 374, 313 362
+                                     C 309 354, 303 349, 295 348
+                                     C 290 350, 286 353, 283 358 Z"
+                                  data-region="Brain Stem"
+                                  data-function="Arousal, attention & autonomic responses"/>
+                            <path class="brain-fold" d="M 285 380 Q 295 378 305 380" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.6"/>
+                            <path class="brain-fold" d="M 287 400 Q 295 398 303 400" stroke="#1a3a4a" stroke-width="0.8" fill="none" opacity="0.6"/>
+                        </g>
+
+                        <!-- Hippocampus (deep structure) -->
+                        <g id="hippocampus-group" class="brain-region-group">
+                            <ellipse id="hippocampus" class="brain-region brain-tissue"
+                                     cx="258" cy="275" rx="20" ry="28"
+                                     data-region="Hippocampus"
+                                     data-function="Memory formation & emotional associations"/>
+                            <path class="brain-fold" d="M 248 270 Q 258 268 268 270" stroke="#1a3a4a" stroke-width="0.6" fill="none" opacity="0.5"/>
+                        </g>
+                    </g>
+
+                    <!-- Wireframe overlay for high-tech effect -->
+                    <g id="wireframe-overlay" opacity="0.25">
+                        <!-- Vertical lines -->
+                        <line x1="150" y1="80" x2="150" y2="440" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="180" y1="70" x2="180" y2="450" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="210" y1="65" x2="210" y2="450" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="240" y1="60" x2="240" y2="440" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="270" y1="55" x2="270" y2="450" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="300" y1="58" x2="300" y2="440" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="330" y1="70" x2="330" y2="410" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="360" y1="85" x2="360" y2="380" stroke="#00ffaa" stroke-width="0.3"/>
+                        <line x1="390" y1="110" x2="390" y2="350" stroke="#00ffaa" stroke-width="0.3"/>
+
+                        <!-- Curved lines following skull contour -->
+                        <path d="M 130 200 Q 180 80, 290 65 Q 390 75, 410 180"
+                              stroke="#00ffaa" stroke-width="0.3" fill="none"/>
+                        <path d="M 135 240 Q 190 120, 295 105 Q 385 115, 405 220"
+                              stroke="#00ffaa" stroke-width="0.3" fill="none"/>
+                        <path d="M 145 280 Q 210 180, 320 170 Q 380 185, 395 260"
+                              stroke="#00ffaa" stroke-width="0.3" fill="none"/>
+                        <path d="M 155 320 Q 235 240, 330 235 Q 375 250, 385 300"
+                              stroke="#00ffaa" stroke-width="0.3" fill="none"/>
+                        <path d="M 170 360 Q 250 300, 335 295 Q 370 305, 375 335"
+                              stroke="#00ffaa" stroke-width="0.3" fill="none"/>
+                    </g>
+
+                    <!-- Scan lines for high-tech effect -->
+                    <g id="scan-lines" opacity="0.1">
+                        <line x1="100" y1="100" x2="420" y2="100" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="150" x2="420" y2="150" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="200" x2="420" y2="200" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="250" x2="420" y2="250" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="300" x2="420" y2="300" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="350" x2="420" y2="350" stroke="#00ffff" stroke-width="0.5"/>
+                        <line x1="100" y1="400" x2="420" y2="400" stroke="#00ffff" stroke-width="0.5"/>
+                    </g>
+                </svg>
+
+                <div class="audio-status" id="audio-status">
+                    <div class="status-indicator"></div>
+                    <span>Ready to analyze</span>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+                <div class="analysis-display">
+                    <h3>Real-Time Analysis</h3>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <span class="metric-label">Frequency</span>
+                            <span class="metric-value" id="frequency-value">-- Hz</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Tempo</span>
+                            <span class="metric-value" id="tempo-value">-- BPM</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Energy</span>
+                            <span class="metric-value" id="energy-value">--%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Brightness</span>
+                            <span class="metric-value" id="brightness-value">--%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="active-regions">
+                    <h3>Active Brain Regions</h3>
+                    <div id="region-list" class="region-list">
+                        <p class="placeholder">Play music to see active regions</p>
+                    </div>
+                </div>
+
+                <div class="neurological-effects">
+                    <h3>Neurological Effects</h3>
+                    <div id="effects-list" class="effects-list">
+                        <p class="placeholder">Analysis will appear here during playback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- YouTube Player - Small but visible for audio -->
+        <div id="player-container">
+            <div id="player"></div>
+        </div>
+    </div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="audio-analyzer.js"></script>
+    <script src="brain-visualizer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
