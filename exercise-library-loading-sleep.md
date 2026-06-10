@@ -51,6 +51,31 @@ Every exercise from the plan, with the best demo resource found and the key cue 
 | Loaded carry (suitcase) | [Squat University](https://www.youtube.com/watch?v=LJaq4BS7KpE) | Stay tall, don't lean away from the weight, slow steps |
 | Eccentric ER (for left-ER block) | [RehabHero](https://www.rehabhero.ca/exercise/eccentric-shoulder-external-rotation) | Or run the E3 cable ER: assist the lift, 3–5 s lowering |
 
+### Your current program's A–D drills (Cupples)
+
+| Exercise | Best resource | Key cue |
+|---|---|---|
+| ER low oblique sit w/ abduction reach | [Cupples — Low Sit Reaching](https://www.youtube.com/watch?v=tZvSoF9fyjw) · [Oblique Sit Press](https://www.youtube.com/watch?v=Viweg707Tcs) | Exhale to stack, press the support hand into the floor, reach long away (no exact-title video exists — these are the closest Cupples demos) |
+| Frog breathing | [Frog Breathing](https://www.youtube.com/watch?v=SN2AcFinJqQ) · [Cupples — Double Offset Frog Breathing](https://www.youtube.com/watch?v=gqeaNf44a1w) | Knees wide, hips toward heels; full exhale, inhale into low back/posterior pelvis |
+| Seated upper back expansion | [Cupples — Seated Posterior Expansion w/ ER](https://www.youtube.com/watch?v=4529VJeblJc) | Round + reach forward, exhale fully, inhale into the upper back without losing the reach |
+| Reverse lunge to cross connect | [Cupples demo](https://www.youtube.com/watch?v=mgkLb4t4nq4) | As you step back, reach both arms across toward the front-leg side |
+| High step carioca | [High Knee Carioca](https://www.youtube.com/watch?v=PEZ2QekDaZI) (generic — no Cupples video found) | Crossing knee high across the body, tall and rhythmic |
+| Ab wheel rollout w/ sidebend | [Cupples — Ab Wheel Rollout Sideways](https://www.youtube.com/watch?v=YS5E5LXeFqA) | Exhale, tuck pelvis, roll out at an angle; no rib flare |
+
+### Accessories & substitutes
+
+| Exercise | Best resource | Key cue |
+|---|---|---|
+| Doorway pec stretch | [MedBridge demo](https://www.youtube.com/watch?v=M850sCj9LHQ) | Forearms on frame at shoulder height, gentle lean; ribs down, no low-back arch |
+| Crawling | [Cupples — Army Crawl w/ Head Turn](https://www.youtube.com/watch?v=Z1S9WOGHJSg) · [plain Army Crawl](https://www.youtube.com/watch?v=q5e74c6p5nY) | Opposite arm/leg, slow reach, exhale as you pull forward |
+| Neutral-grip machine chest press | [Demo](https://www.youtube.com/watch?v=Heu3lKZqn-k) | Blades back into the pad; no elbow flare or shrug |
+| Neutral-grip machine shoulder press | [Demo](https://www.youtube.com/watch?v=RYVe9WlQcC4) | Palms facing, ribs stacked, no low-back arch |
+| Cable tricep pressdown (dip substitute) | [ScottHermanFitness](https://www.youtube.com/watch?v=2-LAMcpzODU) | Elbows pinned; full extension without shoulders dumping forward |
+| Close-grip push-up on handles (dip substitute) | [Perfect Push-Up form](https://www.youtube.com/watch?v=IODxDxX7oi4) | Hands narrow on handles, elbows ~30° tuck, chest below handle height |
+| Standard pull-up (typewriter regression) | [Calisthenicmovement — Perfect Pull Up](https://www.youtube.com/watch?v=eGo4IYlbE5g) | Dead hang start, set shoulders down first, no kip |
+| Supported one-arm reverse fly | [DB bench-supported](https://www.youtube.com/watch?v=uIP9ghGijPQ) · [cable version](https://www.muscleandstrength.com/exercises/one-arm-cable-reverse-fly.html) | Chest supported, sweep wide leading with the pinky; no trunk twist |
+| Lean-in / cable lateral raise | [Leaning cable lateral raise](https://www.youtube.com/watch?v=xfCU8KWSX9g) | Lean away from anchor, raise to shoulder height, soft elbow, no shrug |
+
 ---
 
 ## 2. Loading, reps, and progression
