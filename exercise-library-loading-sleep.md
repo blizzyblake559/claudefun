@@ -13,17 +13,17 @@ Every exercise from the plan, with the best demo resource found and the key cue 
 
 | Exercise | Best resource | Key cue |
 |---|---|---|
-| 90/90 hip lift (+ reach) | [Zac Cupples deep-dive](https://zaccupples.com/9090-hip-lift-a-movement-deep-dive/) · [balloon version](https://www.youtube.com/watch?v=QXPMpetknm0) | Posterior pelvic tilt, heels pull (hamstrings), FULL exhale to drop ribs; add reach for posterior expansion |
-| Side-lying rib expansion breathing | [YouTube demo](https://www.youtube.com/watch?v=aLhv0FGtVt0) · [Conor Harris on breathing/posture](https://www.conorharris.com/blog/the-massively-underrated-role-of-breathing-in-posture) | Top-side ribs expand up-and-out on inhale — bias your stiff right side |
-| Quadruped rock-back breathing (+ reach) | [YouTube — posterior expansion](https://www.youtube.com/watch?v=zED-opX-3hE) | Hips toward heels, upper back slightly rounded, feel posterior ribs balloon on inhale |
-| Bear position / hover | [Prehab Guys](https://library.theprehabguys.com/vimeo-video/bear-position-hold/) · [YouTube](https://www.youtube.com/watch?v=hePvEr_iYRE) | Knees hover ~1", ribs down, push the floor away (protraction) |
-| Dead bug | [Prehab Guys variations](https://theprehabguys.com/dead-bugs-exercise-variations/) | Low back flat, full exhale, no rib flare as the arm/leg extends |
-| Serratus wall slide | [YouTube](https://www.youtube.com/watch?v=eI7IHxvhA3k) · [RehabHero](https://www.rehabhero.ca/exercise/serratus-wall-slide) | Stay protracted (don't pinch blades) as arms slide overhead |
+| 90/90 hip lift (+ reach) | [Cupples video deep-dive](https://www.youtube.com/watch?v=JEl-vwTMCXk) · [article](https://zaccupples.com/9090-hip-lift-a-movement-deep-dive/) · [balloon version](https://www.youtube.com/watch?v=QXPMpetknm0) | Posterior pelvic tilt, heels pull (hamstrings), FULL exhale + 3–5 s pause; add reach for posterior expansion |
+| Side-lying rib expansion breathing | [Cupples — Sidelying Breathing](https://www.youtube.com/watch?v=_SpwZbU7C9Q) · [Conor Harris on breathing/posture](https://www.conorharris.com/blog/the-massively-underrated-role-of-breathing-in-posture) | Silent nasal inhale into the up-side ribs — bias your stiff right side |
+| Quadruped rock-back breathing (+ reach) | [Cupples — Quadruped Breathing](https://www.youtube.com/watch?v=poOS0fM27aQ) | Hips toward heels, upper back slightly rounded, feel posterior ribs balloon on inhale |
+| Bear position / hover | [Resilient Performance — All Four Bear](https://www.youtube.com/watch?v=InafmaNYTiU) · [Prehab Guys](https://library.theprehabguys.com/vimeo-video/bear-position-hold/) | Knees hover ~1", full exhale, upper back rounds and fills with air |
+| Dead bug | [Cupples — Dead Bug Taps](https://www.youtube.com/watch?v=01WVcoIRutU) · [Prehab Guys variations](https://theprehabguys.com/dead-bugs-exercise-variations/) | Low back flat, exhale as limbs move, no rib flare |
+| Serratus wall slide | [Squat University](https://www.youtube.com/watch?v=oMSVe7PWJ3o) · [RehabHero](https://www.rehabhero.ca/exercise/serratus-wall-slide) | Stay protracted (don't pinch blades), finish with a reach — no shrug |
 | Cable/serratus reach (punch) | [RehabHero serratus punch](https://www.rehabhero.ca/exercise/serratus-punch) | The extra protraction reach at the end IS the rep |
 | Cross connect | [Cupples — supine cross connect](https://zaccupples.com/supine-cross-connect-biomechanics/) · [video](https://www.youtube.com/watch?v=lb1bVUNx-OM) | Controlled contralateral reach/roll, not a forced twist |
 | Low oblique sit | [Cupples tag page](https://zaccupples.com/tag/low-oblique-sit/) · [oblique-sit press](https://zaccupples.com/oblique-sit-press/) | Weight through forearm/pisiform, subtle roll toward the bottom knee |
-| Band/cable ER at side | [E3 Rehab rotator cuff guide](https://e3rehab.com/rotator-cuff-exercises/) · [RehabHero](https://www.rehabhero.ca/exercise/banded-shoulder-external-rotation) | Elbow pinned at side, rotate forearm only — no elbow drift |
-| Cable ER at 90/90 | [Physitrack demo](https://us.physitrack.com/home-exercise-video/cable-machine-external-rotation-at-90-degrees) · [M&S](https://www.muscleandstrength.com/exercises/cable-external-rotation) | Elbow stays at shoulder height; no shrug |
+| Band/cable ER at side | [E3 Rehab video](https://www.youtube.com/watch?v=X-JP6sJTZAI) · [E3 rotator cuff guide](https://e3rehab.com/rotator-cuff-exercises/) | Elbow pinned at side, rotate forearm only — no elbow drift |
+| Cable ER at 90/90 | [Scapular-plane demo](https://www.youtube.com/watch?v=eQ0qxpEXfbM) · [Physitrack](https://us.physitrack.com/home-exercise-video/cable-machine-external-rotation-at-90-degrees) | Elbow stays at shoulder height, scapular plane; no shrug |
 | Side-lying ER | [E3 Rehab](https://e3rehab.com/rotator-cuff-exercises/) · [RehabHero](https://www.rehabhero.ca/exercise/side-lying-shoulder-external-rotations) | Side-lying quiets the upper trap — feel it behind the shoulder |
 | Contract-relax (PNF) for ER | [YouTube demo](https://www.youtube.com/watch?v=VNCe99-6WiE) | ~10% isometric push INTO internal rotation 5–8 s, exhale, move gently into new ER range |
 
@@ -31,23 +31,25 @@ Every exercise from the plan, with the best demo resource found and the key cue 
 
 | Exercise | Best resource | Key cue |
 |---|---|---|
-| Feet-elevated / handle push-up | [Horton Barbell](https://hortonbarbell.com/feet-elevated-push-ups/) | Rigid line, elbows ~45°, full protraction ("push the floor away") at top |
+| Feet-elevated / handle push-up | [E3 Rehab — perfect push-ups](https://www.youtube.com/watch?v=GX87fbBd78A) · [Horton Barbell](https://hortonbarbell.com/feet-elevated-push-ups/) | Rigid line, elbows ~45°, full protraction ("plus") at lockout; handles for depth |
 | Incline push-up | [NASM video](https://www.youtube.com/watch?v=0JUrOH--Kdk) | Straight body line; regression of the above |
-| Neutral-grip DB floor press | [YouTube](https://www.youtube.com/watch?v=oqnNivBhveM) · [M&S](https://www.muscleandstrength.com/exercises/dumbbell-floor-press.html) | Palms in; floor stops the upper arm = built-in range protection |
-| Cable press with reach | [RehabHero serratus punch](https://www.rehabhero.ca/exercise/serratus-punch) | Press, then reach long at lockout |
-| Half-kneeling landmine press | [YouTube](https://www.youtube.com/watch?v=_ArzG9qz-yM) · [guide](https://www.powrpersonaltraining.com/guides/half-kneeling-landmine-press/) | Ribs down, down-knee glute on, follow the bar's arc — no low-back arch |
-| Low-incline neutral DB press | [YouTube](https://www.youtube.com/watch?v=rivOtuZyGVw) · [M&S](https://www.muscleandstrength.com/exercises/palms-in-incline-dumbbell-bench-press.html) | Low incline, palms in, elbows tucked |
+| Neutral-grip DB floor press | [OPEX demo](https://www.youtube.com/watch?v=oqnNivBhveM) · [M&S](https://www.muscleandstrength.com/exercises/dumbbell-floor-press.html) | Palms in; floor stops the upper arm = built-in range protection |
+| Cable press with reach | [Cupples — Standing Low Cable Press](https://www.youtube.com/watch?v=I4I5upFjh3k) · [serratus punch](https://www.rehabhero.ca/exercise/serratus-punch) | Exhale, stay stacked, finish with full reach/protraction |
+| Half-kneeling landmine press | [Cressey demo](https://www.youtube.com/watch?v=_ArzG9qz-yM) · [article](https://ericcressey.com/strength-exercise-of-the-week-half-kneeling-1-arm-landmine-press/) | Ribs down, down-knee glute on, follow the bar's arc — no low-back arch |
+| Low-incline neutral DB press | [Renaissance Periodization](https://www.youtube.com/watch?v=0f6-uCUKqgA) · [M&S neutral-grip](https://www.muscleandstrength.com/exercises/palms-in-incline-dumbbell-bench-press.html) | ~15–30° incline, palms in, deep stretch, elbows tucked |
 
 ### Pulling
 
 | Exercise | Best resource | Key cue |
 |---|---|---|
-| Chest-supported row | [Jeff Nippard short](https://www.youtube.com/shorts/OmlKl6oeeMk) | Chest pinned = no lumbar cheat; full stretch at bottom |
+| Chest-supported row | [Renaissance Periodization](https://www.youtube.com/watch?v=0UBRfiO4zDs) · [Nippard short](https://www.youtube.com/shorts/OmlKl6oeeMk) | Chest glued to pad = no lumbar cheat; full stretch at bottom |
 | Seal row | [StrengthLog guide](https://www.strengthlog.com/seal-row/) · [video](https://www.youtube.com/watch?v=fBgDGkfT8Rc) | Spine fully unloaded; pull to underside of bench |
-| One-arm cable row with reach | [M&S](https://www.muscleandstrength.com/exercises/one-arm-cable-row.html) | Start each rep from a full protracted reach; return slowly INTO the reach |
-| Half-kneeling pulldown | [Mike Robertson](https://robertsontrainingsystems.com/blog/half-kneeling-lat-pulldown/) · [Prehab Guys](https://library.theprehabguys.com/vimeo-video/half-kneeling-lat-pulldown/) | Reach long at the top to open the rib cage; exhale and pull without shrug/twist |
+| One-arm cable row with reach | [Cupples — Bent Over 1-Arm Low Cable Row](https://www.youtube.com/watch?v=eoZlIyeHVNQ) · [M&S](https://www.muscleandstrength.com/exercises/one-arm-cable-row.html) | Let the cable pull you into a full reach + exhale at the bottom before each row |
+| Half-kneeling pulldown | [Cressey demo](https://www.youtube.com/watch?v=B3kKR8n5P1w) · [Mike Robertson](https://robertsontrainingsystems.com/blog/half-kneeling-lat-pulldown/) | Reach long at the top to open the rib cage; pull without shrug, side-bend, or rib flare |
 | Neutral-grip pulldown | [Jeff Nippard pull workout](https://jeffnippard.com/blogs/news/the-ultimate-pull-workout-for-muscle-growth-back-biceps-rear-delts-2023) | Hands as hooks, control the negative |
 | TRX row | [TRX official](https://www.trxtraining.com/blogs/news/trx-inverted-row) · [video](https://www.youtube.com/watch?v=iT_oaf3k0Xw) | Straight line shoulders-to-ankles, lead with the chest |
+| Loaded carry (suitcase) | [Squat University](https://www.youtube.com/watch?v=LJaq4BS7KpE) | Stay tall, don't lean away from the weight, slow steps |
+| Eccentric ER (for left-ER block) | [RehabHero](https://www.rehabhero.ca/exercise/eccentric-shoulder-external-rotation) | Or run the E3 cable ER: assist the lift, 3–5 s lowering |
 
 ---
 
