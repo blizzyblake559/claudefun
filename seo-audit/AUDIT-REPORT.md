@@ -357,8 +357,10 @@ products, this is the gap — and the SERPs (below) show most of it is soft.
    player, your exact sweet spot
 6. `vibratory conveyor manufacturer California` — confused SERP (a
    parts-feeder company and used dealers)
-7. Air separator / **Super Vac** queries — GWI's clone page is #1 and you
-   have no strong indexed Super Vac page; build one and take the name back
+7. Air separator / **Super Vac** queries — GWI's clone page is #1 while
+   your existing page (`/products/vacuums-air-aspirators/`) omits "Super
+   Vac" from its title, slug, and H1 and is invisible for the product's own
+   name; retitle/optimize it and take the name back (see §4.2)
 8. Raisin/prune/peach cluster — already ranking; on-page polish pushes to #1
 
 **Tier 2 — need content + product page:** walnut processing equipment,
@@ -484,10 +486,20 @@ association links, trade press — and there's no contest a search engine can
 see.
 
 **Two urgent items specifically because of GWI:**
-1. **Build a dedicated, optimized Super Vac® page** (with real photos and
-   video of it running product) before "Ultra-VAC" permanently owns the
-   category name in Google's understanding. If Super Vac is trademarked,
-   the ® in titles and schema helps entity disambiguation.
+1. **Rebrand the existing Super Vac page for search.** The page exists —
+   `/products/vacuums-air-aspirators/` — but its title ("Vacuums/Air
+   Aspirators - Valley Welding and Machine Works"), slug, and (apparently)
+   H1 never say "Super Vac," so Google barely associates the product name
+   with it: even `site:vwmworks.com super vac` ranks it ~10th on your own
+   domain, behind testimonials and legacy URLs. Meanwhile GWI's clone page
+   is literally named "UVS/Ultra-VAC" in slug and title and ranks #1 for
+   air-separator queries. Fix: retitle to something like "VWM Super Vac® —
+   Air Separator / Pneumatic Aspirator for Food Processing | VWM Works",
+   put Super Vac in the H1 and first paragraph, add Product schema with the
+   name, consider a redirect-friendly slug like `/products/super-vac/`
+   (301 the old slug), and add real photos/video of it running product.
+   If Super Vac is trademarked, the ® in titles and schema helps entity
+   disambiguation.
 2. **Take the Fresno/Central Valley geo SERPs back** — a "Food Processing
    Equipment Manufacturer — Fresno, CA (Since 1946)" page plus GBP
    optimization. It is your origin story; right now it's their ranking.
